@@ -4,10 +4,11 @@ import Service from "./Service";
 const Services = () => {
     const [services, setServices] = useState([]);
     useEffect(() => {
-        fetch('services.json')
+        fetch('http://localhost:5000/services')
             .then(res => res.json())
             .then(data => {
                 setServices(data)
+                console.log(data)
             })
     }, [])
 
@@ -28,7 +29,7 @@ const Services = () => {
                 }
             </div>
             <div className="grid justify-center my-10">
-            <button className="btn btn-secondary">Show More</button>
+                <button className="btn btn-secondary">Show More</button>
             </div>
 
 
