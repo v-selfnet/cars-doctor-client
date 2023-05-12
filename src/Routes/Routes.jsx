@@ -23,7 +23,7 @@ const router = createBrowserRouter([
           element: <Register></Register>
         },
         {
-          // in server have to mensioned specific id
+          // in server have to mentioned specific id
           path:'/checkout/:id',
           element: <CheckOut></CheckOut>,
           loader: ({params}) => fetch(`http://localhost:5000/services/${params.id}`)
