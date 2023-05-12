@@ -5,7 +5,7 @@ import { AuthContext } from "../../Provider/AuthProvider";
 // bookingService
 const CheckOut = () => {
     const loadService = useLoaderData();
-    const { title, service_id, price } = loadService;
+    const { title, service_id, price, img } = loadService;
 
     // call context api for display active user
     const {user} = useContext(AuthContext)
@@ -22,10 +22,11 @@ const CheckOut = () => {
         const email = form.email.value;
         const phone = form.phone.value;
         // const email = user?.email; // use this way for read only data
-        const booking = {serviceid, title, price, name, date, email, phone} // take data as object
+        const booking = {serviceid, title, price, name, date, email, phone, img} // take data as object
         console.log(booking)
 
         // send data to server via [POST]
+        // const result = await bookingsCollection.insertOne(booking) [server side code]
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
             headers:{

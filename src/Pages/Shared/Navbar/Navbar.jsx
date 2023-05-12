@@ -19,7 +19,7 @@ const Navbar = () => {
         <li><Link to=''>Blog</Link></li>
         {
             user?.email ? <>
-                {/* <li><Link to="/bookings">My Bookings</Link></li> */}
+                <li><Link to="/bookings">My Bookings</Link></li>
                 <li><button onClick={handleLogOut}>Log out</button></li>
             </>
                 : <li> <Link to="/login">Login</Link> </li>
@@ -27,7 +27,7 @@ const Navbar = () => {
 
     </>
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-300">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
