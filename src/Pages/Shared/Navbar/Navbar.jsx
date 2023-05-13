@@ -45,6 +45,9 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal px-1">
                     {navItems}
                 </ul>
+                {
+                    user && user.email
+                }
             </div>
             <div className="navbar-end">
                 <button className="btn btn-outline btn-secondary">Appointment</button>
