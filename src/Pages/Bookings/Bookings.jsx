@@ -11,7 +11,7 @@ const Bookings = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setBookings(data))
-    }, [])
+    }, [url])
 
     // [handleDelete] function destructure to BookingRow.jsx
     const handleDelete = id => {
@@ -45,7 +45,7 @@ const Bookings = () => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            if(data.modifiedCunt > 0){
+            if(data.modifiedCount > 0){
                 // update status
                 const remaining = bookings.filter(booking => booking._id !== id)
                 const updated = bookings.find(booking => booking._id === id)

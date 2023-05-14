@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImage from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../Provider/AuthProvider';
 import { useContext, useState } from 'react';
@@ -6,6 +6,14 @@ import { useContext, useState } from 'react';
 const Login = () => {
     const { signIn } = useContext(AuthContext)
     // console.log('Signin', signIn)
+
+    const location = useLocation() // 3. redirect target/clicked link/page after login
+
+    const navigate = useNavigate(); // 5. redirect target/clicked link/page after logi
+
+
+    // 4. redirect target/clicked link/page after login [set pathname]
+    const from = location.state?.from?.pathname || '/';
 
     const [success, setSuccess] = useState(null)
 
@@ -22,6 +30,8 @@ const Login = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 setSuccess('Login Success!')
+                // 6. redirect target/clicked link/page after login [navigate]
+                navigate(from, {replace:true})
             })
             .catch(error => {
                 console.error(error.message)

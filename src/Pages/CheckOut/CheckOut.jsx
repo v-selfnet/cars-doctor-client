@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Navigate, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 // bookingService
@@ -8,9 +8,9 @@ const CheckOut = () => {
     const { title, service_id, price, img } = loadService;
 
     // call context api for display active user
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     // console.log(user)
-    
+
     const handleBookNow = event => {
         event.preventDefault()
         const form = event.target;
@@ -22,25 +22,26 @@ const CheckOut = () => {
         const email = form.email.value;
         const phone = form.phone.value;
         // const email = user?.email; // use this way for read only data
-        const booking = {serviceid, title, price, name, date, email, phone, img} // take data as object
+        const booking = { serviceid, title, price, name, date, email, phone, img } // take data as object
         console.log(booking)
 
         // send data to server via [POST]
         // const result = await bookingsCollection.insertOne(booking) [server side code]
         fetch('http://localhost:5000/bookings', {
             method: 'POST',
-            headers:{
+            headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(booking)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.insertedId){
-                alert('Successfully Booked Service. Update to Database.')
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    alert('Successfully Booked Service. Update to Database.')
+                }
+                <Navigate to='/bookings' replace></Navigate>
+            })
     }
 
     return (
@@ -90,7 +91,9 @@ const CheckOut = () => {
                 </div>
             </div>
             <div className="form-control mt-6 mx-20">
-                <input className="btn btn-primary btn-block" type="submit" value="Book Now" />
+                {/* <Link to='/bookings'> */}
+                <input className="btn btn-primary btn-block" type="submit" value="Book Now"/>
+                {/* </Link> */}
             </div>
         </form>
     );
