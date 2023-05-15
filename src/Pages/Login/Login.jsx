@@ -30,13 +30,31 @@ const Login = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 setSuccess('Login Success!')
-                // 6. redirect target/clicked link/page after login [navigate]
-                navigate(from, {replace:true})
-            })
+
+                // JWT STATR FROM HERE
+                const userEmail = { email: loggedUser.email }
+                fetch('http://localhost:5000/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(userEmail)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // try login to check send response from server
+                        console.log('JWT Response', data)
+                        // set token in local storage & remove token when logout
+                        localStorage.setItem('car-access-token', data.token)
+                        // 6. redirect target/clicked link/page after login [navigate]
+                        navigate(from, { replace: true })
+                    }) // JWT END
+            }) // signIn .then End
             .catch(error => {
                 console.error(error.message)
-            })
-    }
+            });
+    } // handelSignin End
+
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row gap-40">
