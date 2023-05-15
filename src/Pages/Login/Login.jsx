@@ -1,7 +1,8 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import loginImage from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../Provider/AuthProvider';
 import { useContext, useState } from 'react';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const Login = () => {
     const { signIn } = useContext(AuthContext)
@@ -30,25 +31,10 @@ const Login = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser)
                 setSuccess('Login Success!')
+                // 6. redirect target/clicked link/page after login [navigate]
+                navigate(from, { replace: true })
 
-                // JWT STATR FROM HERE
-                const userEmail = { email: loggedUser.email }
-                fetch('http://localhost:5000/jwt', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(userEmail)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        // try login to check send response from server
-                        console.log('JWT Response', data)
-                        // set token in local storage & remove token when logout
-                        localStorage.setItem('car-access-token', data.token)
-                        // 6. redirect target/clicked link/page after login [navigate]
-                        navigate(from, { replace: true })
-                    }) // JWT END
+                
             }) // signIn .then End
             .catch(error => {
                 console.error(error.message)
@@ -85,12 +71,9 @@ const Login = () => {
                                 <input type="submit" value="Login" className="btn btn-primary" />
                             </div>
                         </form>
-                        <div className='text-center space-y-6'>
-                            <p>or signin with</p>
-                            <button className="btn btn-outline btn-xs btn-accent mr-6">Google</button>
-                            <button className="btn btn-outline btn-xs btn-accent">Github</button>
-                            <p className='text-xs'>Do not have an Account? <Link to='/register' className='text-orange-600'>Please Register</Link></p>
-                        </div>
+                        <SocialLogin></SocialLogin>
+
+
                     </div>
                 </div>
             </div>

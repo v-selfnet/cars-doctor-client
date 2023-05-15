@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import registerImage from '../../assets/images/login/login.svg';
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Register = () => {
     const { createUser } = useContext(AuthContext)
@@ -68,12 +68,7 @@ const Register = () => {
                                 <input type="submit" value="Register" className="btn btn-primary" />
                             </div>
                         </form>
-                        <div className='text-center space-y-6'>
-                            <p>or register with</p>
-                            <button className="btn btn-outline btn-xs btn-accent mr-6">Google</button>
-                            <button className="btn btn-outline btn-xs btn-accent">Github</button>
-                            <p className='text-xs'>Already have an Account? <Link to='/login' className='text-orange-600'>Please Signin</Link></p>
-                        </div>
+                        <SocialLogin></SocialLogin>
                     </div>
                 </div>
             </div>
