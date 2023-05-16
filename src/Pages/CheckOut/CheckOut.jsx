@@ -27,7 +27,7 @@ const CheckOut = () => {
 
         // send data to server via [POST]
         // const result = await bookingsCollection.insertOne(booking) [server side code]
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://car-doctor-server-two-ivory.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

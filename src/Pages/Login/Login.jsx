@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginImage from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../Provider/AuthProvider';
 import { useContext, useState } from 'react';
@@ -72,6 +72,7 @@ const Login = () => {
                             </div>
                         </form>
                         <SocialLogin></SocialLogin>
+                        <p className='text-xs'>Do not have an Account? <Link to='/register' className='text-orange-600'>Please Register</Link></p>
 
 
                     </div>
